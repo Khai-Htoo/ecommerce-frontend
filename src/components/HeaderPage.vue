@@ -159,6 +159,11 @@
                             language == 'en' ? 'Home' : 'မူလ'
                           }}</router-link>
                         </li>
+                        <li :class="{ active: $route.name === 'productList' }">
+                          <router-link :to="{ name: 'productList' }">{{
+                            language == 'en' ? 'Product List' : 'ထုတ်ကုန်စာရင်း'
+                          }}</router-link>
+                        </li>
                         <li :class="{ active: $route.name === 'order' }">
                           <router-link :to="{ name: 'order' }">{{
                             language == 'en' ? 'Order' : 'အော်ဒါများ'

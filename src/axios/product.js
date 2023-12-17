@@ -6,6 +6,7 @@ const getProduct = () => {
   const fetchProduct = async (url) => {
     const response = await axios.get(url)
     products.value = response.data.data
+    console.log(products)
   }
   return { products, fetchProduct }
 }

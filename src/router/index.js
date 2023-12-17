@@ -8,6 +8,8 @@ import NotificationPage from '../views/NotificationPage.vue'
 import OrderPage from '../views/OrderPage.vue'
 import NotificationDetailPage from '../views/NotificationDetail.vue'
 import ContactPage from '../views/ContactPage.vue'
+import productList from '../views/ProductList.vue'
+import productDetail from '../views/ProductDetail.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -57,6 +59,17 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: ContactPage
+    },
+    {
+      path: '/productList',
+      name: 'productList',
+      component: productList
+    },
+    {
+      path: '/productDetail/:id',
+      name: 'productDetail',
+      component: productDetail,
+      props: true
     }
   ]
 })
