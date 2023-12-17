@@ -35,12 +35,20 @@
         </div>
       </div>
       <div class="col-md-10">
-        <div class="float-right">
+        <div class="d-flex justify-content-end">
+          <div class="d-flex justify-content-center align-items-center">
+            <p>Sort By</p>
+            <select class="form-control mx-2 count" v-model="sortPrice" @change="sortPriceFilter">
+              <option value="all" selected>All</option>
+              <option value="expensive">Expensive</option>
+              <option value="cheapest">Cheapest</option>
+            </select>
+          </div>
           <!-- Products -->
           <div class="d-flex justify-content-center align-items-center">
             <p>Show</p>
             <select class="form-control mx-2 count" v-model="paginate" @change="changePaginate">
-              <option value="all" selected>All</option>
+              <option value="all">All</option>
               <option value="10">10</option>
               <option value="20">20</option>
               <option value="30">30</option>
@@ -76,11 +84,16 @@ const { color, getColor } = fetchColor()
 const { brand, getBrand } = fetchBrand()
 const product = ref()
 const paginate = ref('all')
+const sortPrice = ref('all')
 getCategory()
 getColor()
 getBrand()
+
+// product
 const fetchProduct = async () => {
-  const response = await axios.get(`/api/productList?paginate=${paginate.value}`)
+  const response = await axios.get(
+    `/api/productList?paginate=${paginate.value}&sort=${sortPrice.value}`
+  )
   console.log(response.data.data)
   if (response.data.data) {
     product.value = response.data.data
@@ -89,7 +102,14 @@ const fetchProduct = async () => {
   }
 }
 fetchProduct()
+
+// paginate
 const changePaginate = () => {
+  fetchProduct()
+}
+
+// sort by price
+const sortPriceFilter = () => {
   fetchProduct()
 }
 </script>
@@ -109,7 +129,7 @@ const changePaginate = () => {
   background-color: #e7e6e6 !important;
 }
 .product {
-  margin-top: 70px;
+  margin-top: 40px;
 }
 .card {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
