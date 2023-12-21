@@ -225,23 +225,11 @@ import { useAuthStore } from '../store/index'
 import fetchCategory from '../axios/category'
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
-import allNotification from '../axios/notification'
 const authStore = useAuthStore()
-const { authModal, count, cart, authUser, language } = storeToRefs(authStore)
+const { authModal, count, cart, authUser, language, notiCount } = storeToRefs(authStore)
 const { category, getCategory } = fetchCategory()
 const languageData = ref('en')
 const $toast = useToast()
-
-// notification
-const { notiCount, fetchNoti } = allNotification()
-const fetchUser = async () => {
-  const result = await axios.get('/api/user')
-  if (result) {
-    authUser.value = result.data
-    fetchNoti(`/api/notifications/${result.data.id}`)
-  }
-}
-fetchUser()
 
 // cart count
 onMounted(async () => {
@@ -268,6 +256,8 @@ const languageSwitch = async () => {
     })
   }
 }
+
+// logout
 const logout = () => {
   Swal.fire({
     title: 'You wanna logout?',
@@ -290,6 +280,8 @@ const logout = () => {
     }
   })
 }
+
+// category
 getCategory()
 const login = () => {
   authModal.value = true

@@ -3,7 +3,7 @@
     <div class="backdropCus" @click.self="closeModel">
       <div class="modalCus animate__animated animate__bounceIn">
         <div class="card">
-          <h5 class="text-center mt-5">Change Your Account Password</h5>
+          <h5 class="text-center mt-5">Add Money To Your Wallet</h5>
           <i @click="closeModel" class="fas fa-times-circle text-muted"></i>
           <div class="card-body">
             <div class="p-5">

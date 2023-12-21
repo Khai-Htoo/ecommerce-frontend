@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-lg-2 col-md-3">
         <div class="">
           <p class="bg-secondary p-2">
             <span class="ml-2 text-white"><i class="mr-2 fa-solid fa-list"></i>Category</span>
@@ -34,7 +34,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-10">
+      <div class="col-md-9 col-lg-10">
         <div class="d-flex justify-content-end">
           <div class="d-flex justify-content-center align-items-center">
             <p>Sort By</p>
@@ -56,11 +56,11 @@
           </div>
         </div>
         <div class="row product">
-          <div class="col-md-3" v-for="p in product" :key="p.id">
+          <div class="col-md-6 col-lg-3" v-for="p in product" :key="p.id">
             <router-link :to="{ name: 'productDetail', params: { id: p.id } }">
-              <div class="card mb-4">
+              <div class="card mb-4 animate__animated animate__fadeIn">
                 <div class="card-body">
-                  <img :src="p.imageURL" alt="" class="text-center" />
+                  <img :src="p.imageURL" alt="" class="text-center w-100" />
                   <p class="text-center mt-2">{{ p.name_en }}</p>
                   <h6 class="text-center">{{ p.discount_price }}$</h6>
                 </div>
@@ -94,7 +94,6 @@ const fetchProduct = async () => {
   const response = await axios.get(
     `/api/productList?paginate=${paginate.value}&sort=${sortPrice.value}`
   )
-  console.log(response.data.data)
   if (response.data.data) {
     product.value = response.data.data
   } else if (response.data.paginateData) {

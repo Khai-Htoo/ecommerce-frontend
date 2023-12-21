@@ -31,17 +31,23 @@
 
 <script setup>
 import axios from 'axios'
+import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import allNotification from '../axios/notification'
+import { useAuthStore } from '../store'
 const { fetchNoti } = allNotification()
 const noti = ref(null)
 const props = defineProps(['id'])
+const authStore = useAuthStore()
+const { notiCount } = storeToRefs(authStore)
+
 const fetchUser = async () => {
   const result = await axios.get('/api/user')
   if (result) {
     const response = await axios.get(`/api/notification?user_id=${result.data.id}&noti=${props.id}`)
     if (response) {
-      noti.value = response.data
+      noti.value = response.data.notification
+      notiCount.value = response.data.notiCount
     }
     fetchNoti(`/api/notifications/${result.data.id}`)
   }
